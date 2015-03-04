@@ -2,18 +2,42 @@
 	display: none;
 }
 
+.color-schema {
+	margin-top: 20px;
+	text-align: center;
+}
+
+.color-schema-box {
+	height: 200px;
+	padding: 10px;
+	display: inline-block;
+	width: 300px;
+}
+
+.colorpicker-box {
+	background-color: red;
+}
+
+.color-settings-box {
+	background-color: blue;
+}
+
 .navbar a {
 	font-size: 18px;
 	font-weight: 400;
 }
-.navbar {
-	position: fixed;
-	top: 20px;
-	z-index: 9999;
-}
 
 .navbar .navbar-collapse {
 	text-align: center;
+}
+
+.result-color-box {
+	background-color: #FF016B;
+	width: 50px;
+	height: 50px;
+	margin: auto;
+	border: 1px solid gray;
+	border-radius: 8px;
 }
 
 .navbar .navbar-nav {
@@ -26,35 +50,56 @@
 	width: 100%;
 	position: relative;
 	overflow: auto;
+	background-color: white;
+	padding: 40px;
 }
 
 .alert {
+	padding: 9px;
+	height: 40px;
 	position: absolute;
 	text-align: center;
-	top: 0;
+	top: 0px;
 	margin: auto;
 	left: 0;
 	right: 0;
 }
 
+.glyphicon-exclamation-sign {
+	color: #ED864E;
+}
+
+body {
+	background-image: url(../images/background.png);
+}
+
 /* Desktop */
 @media only screen and (min-width : 768px) {
+	.container {
+		max-width: 900px;
+	}
+
+	.navbar, .workspace {
+		box-shadow: 0 0 10px #e7e7e7; 
+	}
+
+	.workspace {
+		margin-top: 20px;
+		border-radius: 4px;
+		border: 1px solid #ddd;
+	}
+
 	.alert {
 		max-width: 500px;
 	}
 
 	body {
-		padding-top: 70px;
-		margin-bottom: 20px;
+		padding-top: 20px;
 	}
 }
 
 /* Smartphones (portrait and landscape) */
 @media only screen and (max-width : 767px) {
-	body{
-		margin-top: 50px;
-	}
-
 	.alert {
 		border-radius: 0;
 		width: 100%;
@@ -73,4 +118,18 @@
 	.choose-scheme-tip {
 		display: inline;
 	}
+
+	.navbar-collapse {
+		position: absolute;
+		width: 100%;
+		background-color: #f8f8f8;
+		border-bottom: 1px solid #e7e7e7;
+		z-index: 9999;
+	}
+
+	.workspace {
+		border-bottom: 1px solid #e7e7e7;
+		box-shadow: 0 4px 2px -2px #e7e7e7;
+	}
+
 }
