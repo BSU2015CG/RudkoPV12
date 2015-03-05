@@ -1,35 +1,21 @@
-.choose-scheme-tip {
-	display: none;
-}
-
-.color-schema {
-	margin-top: 20px;
+.color-scheme {
+	margin-top: 10px;
 	text-align: center;
-	position: relative;
-}
-
-.color-schema-box {
 	vertical-align: top;
 	padding: 10px;
 	display: inline-block;
-	width: 250px;
+	width: 280px;
+	border: 1px solid #e7e7e7;
+	border-radius: 4px
 }
 
-.colorpicker-box {
-	height: 250px;
-	background-color: red;
+#color-picker-wrap {
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
-.color-settings-box {
-}
-
-.navbar a {
-	font-size: 18px;
-	font-weight: 400;
-}
-
-.navbar .navbar-collapse {
-	text-align: center;
+#color-picker {
+	border: 1px solid black;
 }
 
 .result-color-box {
@@ -41,57 +27,42 @@
 	border-radius: 8px;
 }
 
-.navbar .navbar-nav {
-    display: inline-block;
-    float: none;
-    vertical-align: top;
-}
-
 .workspace {
-	width: 100%;
+	margin: auto;
 	position: relative;
-	overflow: auto;
 	background-color: white;
-	padding-top: 15px;
-	padding-bottom: 15px;
+	padding: 15px;
+	text-align: center;
+	width: 950px;
 }
 
-.alert {
-	width: 165px;
-	height: 30px;
-	left: 454px;
-	top: 0;
-	padding: 5px;
-	position: absolute;
-	text-align: center;
-	margin: auto;
-	left: 0;
-	right: 0;
+.color-scheme input[type="number"]{
+	width: 40px;
+	margin-left: 10px;
+	margin-right: 10px;
 }
 
 input[type="range"] {
-	margin-top: 15px;
-}
-
-.glyphicon-exclamation-sign {
-	color: #ED864E;
+	margin-top: 13px;
+	width: 170px;
 }
 
 body {
+	font-family: Helvetica;
+	margin: 0;
 	background-image: url(../images/background.png);
 }
 
-/* Desktop */
-@media only screen and (min-width : 768px) {
-	.container {
-		max-width: 900px;
-	}
-
-	.navbar, .workspace {
-		box-shadow: 0 0 10px #e7e7e7; 
-	}
-
+/*Desktop */
+@media only screen and (max-width : 1100px) {
 	.workspace {
+		width: 700px;
+	}
+}
+
+@media only screen and (min-width : 768px) {
+	.workspace {
+		box-shadow: 0 0 10px #e7e7e7; 
 		margin-top: 20px;
 		border-radius: 4px;
 		border: 1px solid #ddd;
@@ -104,29 +75,8 @@ body {
 
 /* Smartphones (portrait and landscape) */
 @media only screen and (max-width : 767px) {
-	.navbar {
-		top: 0;
-		margin-bottom: 0;
-		width: 100%;
-	}
-
-	.global-container {
-		padding-left: 0;
-		padding-right: 0;
-	}
-	.choose-scheme-tip {
-		display: inline;
-	}
-
-	.navbar-collapse {
-		position: absolute;
-		width: 100%;
-		background-color: #f8f8f8;
-		border-bottom: 1px solid #e7e7e7;
-		z-index: 9999;
-	}
-
 	.workspace {
+		width: 100%;
 		border-bottom: 1px solid #e7e7e7;
 		box-shadow: 0 4px 2px -2px #e7e7e7;
 	}

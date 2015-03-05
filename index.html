@@ -3,56 +3,39 @@
     <head>
         <title>Fancy Colors</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="styles/bootstrap.min.css" />
         <link rel="stylesheet" href="styles/style.css" />
-        <link rel="stylesheet" href="styles/rangestyle.css" />
+        <link rel="stylesheet" href="styles/componentstyle.css" />
     </head>
     <body>
 
-        <div class="container global-container">
-            <nav class="navbar navbar-default">
-                <div class="fluid container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-menu"
-                        aria-expanded="false">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand choose-scheme-tip">Choose scheme</a>
-                    </div>
-                    <div id="navbar-menu" class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                            <li class="active"><a href = "#">HSV</a></li>
-                            <li><a href = "#">LAB</a></li>
-                            <li><a href = "#">CMYK</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+        <div class="workspace">
+           <div class="result-color-box"></div>
 
-            <div class="workspace">
-               <!--<div class="alert alert-warning" role="alert">
-                   <span class="glyphicon glyphicon-exclamation-sign"></span>
-                   Precision may be lost
-               </div>-->
-               <div class="result-color-box"></div>
+           <div id="color-picker-wrap">
+               <canvas id="color-picker" var="1" width="267" height="267"></canvas>
+           </div>
 
-               <div class="color-schema">
-                   <div class="colorpicker-box color-schema-box"></div>
-                   <div class="color-settings-box color-schema-box">
-                       <input type="range" />
-                       <input type="range" />
-                       <input type="range" />
-                   </div>
-               </div>
+           <div class="color-scheme">
+               <div>H <input type="number"><input type="range" /></div>
+               <div>S <input type="number"><input type="range" /></div>
+               <div>V <input type="number"><input type="range" /></div>
+           </div>
 
-            </div>
-            
+           <div class="color-scheme">
+               <div>C <input type="number"><input type="range" /></div>
+               <div>M <input type="number"><input type="range" /></div>
+               <div>Y <input type="number"><input type="range" /></div>
+           </div>
+
+           <div class="color-scheme">
+               <div>L <input type="number"><input type="range" /></div>
+               <div>A <input type="number"><input type="range" /></div>
+               <div>B <input type="number"><input type="range" /></div>
+           </div>
+
         </div>
-
-        <script src="scripts/jquery.min.js"></script>
-        <script src="scripts/bootstrap.min.js"></script>
+        
+        <script src="scripts/colorpicker.js"></script>
         <script src="scripts/currentcolor.js"></script>
         <script src="scripts/init.js"></script>
     </body>
