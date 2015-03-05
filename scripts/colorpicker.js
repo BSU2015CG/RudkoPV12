@@ -25,8 +25,6 @@ function initColorPicker(){
         var pixel = imageData.data;
 
         CurrentColor.setColor(pixel[0], pixel[1], pixel[2]);
-
-    	alert(x + ' - ' + y);
     }, false);
 }
 

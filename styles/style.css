@@ -15,7 +15,8 @@
 }
 
 #color-picker {
-	border: 1px solid black;
+	width: 267px;
+	height: 267px;
 }
 
 .result-color-box {
