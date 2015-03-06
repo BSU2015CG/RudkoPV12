@@ -24,7 +24,7 @@ function initColorPicker(){
         var imageData = ctx.getImageData(x, y, 1, 1);
         var pixel = imageData.data;
 
-        currentColor.setColor(pixel[0], pixel[1], pixel[2]);
+        currentColor.setColor(pixel[0]/255, pixel[1]/255, pixel[2]/255);
     }, false);
 };
 

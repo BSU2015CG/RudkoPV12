@@ -47,7 +47,7 @@ var HSV =  {
 		    max = Math.max(r, g, b),
 		    diff = max - min, h;
 
-		if(max = min){
+		if(max == min){
 			h = 0;
 		} else if(r == max){
 			h = 60*(g - b)/diff;
@@ -149,7 +149,7 @@ function initRangeControls(){
         })(control);
 
         box.addEventListener('change', onComponentValueChanged);
-        range.addEventListener('change', onComponentValueChanged);
+        range.addEventListener('input', onComponentValueChanged);
 
         control.setValue = function(value){
         	this.value = value;
