@@ -57,3 +57,10 @@ input[type="number"]::-webkit-inner-spin-button:active{
     opacity: .8;
 }
 
+button {
+	font-family: Helvetica;
+	background-color: white;
+	border: 1px solid #e7e7e7;
+	border-radius: 4px;
+	padding: 5px;
+}

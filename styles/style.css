@@ -9,6 +9,10 @@
 	border-radius: 4px
 }
 
+#color-picker-button {
+	display: none;
+}
+
 #color-picker-wrap {
 	margin-top: 20px;
 	margin-bottom: 20px;
@@ -17,6 +21,7 @@
 #color-picker {
 	width: 267px;
 	height: 267px;
+	border-radius: 4px;
 }
 
 .result-color-box {
@@ -81,5 +86,34 @@ body {
 		border-bottom: 1px solid #e7e7e7;
 		box-shadow: 0 4px 2px -2px #e7e7e7;
 	}
+
+	#color-picker-wrap {
+		display: none;
+	}
+
+	#color-picker-wrap[data-hidden="false"] {
+		display: block;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 9999;
+		background: rgba(0,0,0,0.8);
+		margin: 0;
+	}
+
+	#color-picker {
+		margin-top: 100px;
+	}
+
+	#color-picker-button {
+
+	    margin-top: 10px;
+	    margin-bottom: 10px;
+	    margin-left: auto;
+	    margin-right: auto;
+	    display: block;
+    }
 
 }
