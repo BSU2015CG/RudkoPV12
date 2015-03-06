@@ -100,7 +100,7 @@ var HSV =  {
 	},
 	init: function(){
 		currentColor.addColorChangedListener(this);
-		that = this;
+		var that = this;
 		document.getElementById('h-control').addValueChangedListener(function(value){
 			that.setH(value);
 		});
@@ -113,8 +113,68 @@ var HSV =  {
 	}
 };
 
+var CMYK =  {
+	_c: 0,
+	_m: 0,
+	_y: 0,
+	_k: 0,
+
+	setC: function(c){
+		this._c = c;
+		this.updateColor();
+	},
+	setM: function(m){
+		this._m = m;
+		this.updateColor();
+	},
+	setY: function(y){
+		this._y = y;
+		this.updateColor();
+	},
+	setK: function(k){
+		this._k = k;
+		updateColor();
+	},
+	onColorChanged: function(r, g, b){
+		var c = 1 - r,
+		    m = 1 - g, 
+		    y = 1 - b,
+		    k = Math.min(c, m, y);
+		this._c = c - k;
+		this._m = m - k;
+		this._y = y - k;
+		this._k = k;
+		this.updateComponents();
+	},
+	updateColor: function(){
+		var c = this._c + this._k,
+		    m = this._m + this._k,
+		    y = this._y + this._k;
+		currentColor.setColor(1-c, 1-m, 1-y, this);
+	},
+	updateComponents: function(){
+		document.getElementById('c-control').setValue(this._c*100);
+		document.getElementById('m-control').setValue(this._m*100);
+		document.getElementById('y-control').setValue(this._y*100);
+	},
+	init: function(){
+		currentColor.addColorChangedListener(this);
+		var that = this;
+		document.getElementById('c-control').addValueChangedListener(function(value){
+			that.setC(value/100);
+		});
+		document.getElementById('m-control').addValueChangedListener(function(value){
+			that.setM(value/100);
+		});
+		document.getElementById('y-control').addValueChangedListener(function(value){
+			that.setY(value/100);
+		});
+	}
+};
+
 function initColorModels(){
 	HSV.init();
+	CMYK.init();
 }
 
 function initRangeControls(){
