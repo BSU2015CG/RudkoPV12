@@ -1,5 +1,6 @@
 function init(){
 	initColorPicker();
+	initColorPickerModal();
 	var resultColorBoxes = document.getElementsByClassName('result-color-box');
 	var resultColorBoxCallback = function(r,g,b){
 		for(var key = 0; key < resultColorBoxes.length; key++){
