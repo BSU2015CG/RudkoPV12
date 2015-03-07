@@ -9,6 +9,11 @@
 	border-radius: 4px
 }
 
+.color-schemes-wrap {
+	max-width: 800px;
+	margin: auto;
+}
+
 #color-picker-button {
 	display: none;
 }
@@ -114,6 +119,15 @@ body {
 	    margin-left: auto;
 	    margin-right: auto;
 	    display: block;
+    }
+
+    .color-scheme {
+    	padding-left: 5px;
+    	padding-top: 5px;
+    }
+
+    input[type="range"] {
+	    width: 160px;
     }
 
 }

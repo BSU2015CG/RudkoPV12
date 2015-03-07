@@ -94,9 +94,9 @@ var HSV =  {
 		currentColor.setColor(r/100, g/100, b/100, this);
 	},
 	updateComponents: function(){
-		document.getElementById('h-control').setValue(this._h);
-		document.getElementById('s-control').setValue(this._s);
-		document.getElementById('v-control').setValue(this._v);
+		document.getElementById('h-control').setValue(Math.floor(this._h));
+		document.getElementById('s-control').setValue(Math.floor(this._s));
+		document.getElementById('v-control').setValue(Math.floor(this._v));
 	},
 	init: function(){
 		currentColor.addColorChangedListener(this);
@@ -153,9 +153,9 @@ var CMYK =  {
 		currentColor.setColor(1-c, 1-m, 1-y, this);
 	},
 	updateComponents: function(){
-		document.getElementById('c-control').setValue(this._c*100);
-		document.getElementById('m-control').setValue(this._m*100);
-		document.getElementById('y-control').setValue(this._y*100);
+		document.getElementById('c-control').setValue(Math.floor(this._c*100));
+		document.getElementById('m-control').setValue(Math.floor(this._m*100));
+		document.getElementById('y-control').setValue(Math.floor(this._y*100));
 	},
 	init: function(){
 		currentColor.addColorChangedListener(this);
@@ -172,9 +172,58 @@ var CMYK =  {
 	}
 };
 
+var XYZ = {
+	_x: 0,
+	_y: 0,
+	_z: 0,
+
+	setX: function(x){
+		this._x = x;
+		this.updateColor();
+	},
+	setY: function(y){
+		this._y = y;
+		this.updateColor();
+	},
+	setZ: function(z){
+		this._z = z;
+		this.updateColor();
+	},
+	onColorChanged: function(r, g, b){
+		var xyz = rgbToXyz(r, g, b);
+		this._x = xyz[0];
+		this._y = xyz[1];
+		this._z = xyz[2];
+		this.updateComponents();
+	},
+	updateColor: function(){
+		var rgb = xyzToRgb(this._x, this._y, this._z);
+		currentColor.setColor(rgb[0], rgb[1], rgb[2], this);
+	},
+	updateComponents: function(){
+		document.getElementById('x-control').setValue(Math.floor(this._x*100));
+		document.getElementById('ciey-control').setValue(Math.floor(this._y*100));
+		document.getElementById('z-control').setValue(Math.floor(this._z*100));
+	},
+	init: function(){
+		currentColor.addColorChangedListener(this);
+		var that = this;
+		document.getElementById('x-control').addValueChangedListener(function(value){
+			that.setX(value/100);
+		});
+		document.getElementById('ciey-control').addValueChangedListener(function(value){
+			that.setY(value/100);
+		});
+		document.getElementById('z-control').addValueChangedListener(function(value){
+			that.setZ(value/100);
+		});
+	}
+};
+
 function initColorModels(){
 	HSV.init();
 	CMYK.init();
+	XYZ.init();
 }
 
 function initRangeControls(){
@@ -228,4 +277,32 @@ function initRangeControls(){
         	this.valueChangedListeners.push(listener);
         };
 	}
+};
+
+function rgbToXyz() {
+	return matrixByVector(
+		[[0.4124, 0.3576, 0.1805], 
+		 [0.2126, 0.7152, 0.0722], 
+		 [0.0913, 0.1192, 0.9505]],
+		 arguments);
+};
+
+function xyzToRgb() {
+	return matrixByVector(
+		[[3.2408, -1.5372, -0.4985], 
+		 [-0.9693, 1.8760, 0.0416], 
+		 [0.0557, -0.2040, 1.0573]],
+		 arguments);
+};
+
+function matrixByVector(m, v) {
+	var result = [];
+	for(var i = 0; i < m.length; i++){
+		var sum = 0;
+		for(var j = 0; j < v.length; j++){
+			sum += m[i][j]*v[j];
+		}
+		result.push(sum);
+	}
+	return result;
 };
