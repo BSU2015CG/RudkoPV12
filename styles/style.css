@@ -9,6 +9,25 @@
 	border-radius: 4px
 }
 
+.warning {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #E8CE58;
+    border-radius: 5px;
+    position: absolute;
+    top: 2px;
+    left: -5px;
+    background: #F7E699 url(../images/sign.gif) no-repeat center center;
+}
+
+.warning-hidden {
+	display: none;
+}
+
+.range-control {
+	position: relative;
+}
+
 .color-schemes-wrap {
 	max-width: 800px;
 	margin: auto;
@@ -79,6 +98,10 @@ body {
 		border: 1px solid #ddd;
 	}
 
+	.warning {
+		left: -8px;
+	}
+
 	body {
 		padding-top: 20px;
 	}
@@ -90,6 +113,8 @@ body {
 		width: 100%;
 		border-bottom: 1px solid #e7e7e7;
 		box-shadow: 0 4px 2px -2px #e7e7e7;
+		padding-right: 0;
+		padding-left: 0;
 	}
 
 	#color-picker-wrap {
@@ -124,6 +149,7 @@ body {
     .color-scheme {
     	padding-left: 5px;
     	padding-top: 5px;
+    	width: 250px;
     }
 
     input[type="range"] {

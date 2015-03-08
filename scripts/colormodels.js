@@ -282,24 +282,31 @@ function initRangeControls(){
 	for(var i = 0; i < controls.length; i++) {
 		var box = document.createElement('input'),
 		    range = document.createElement('input'),
+		    warning = document.createElement('div'),
 		    control = controls[i];
 
         box.type = 'number';
         range.type = 'range';
+        warning.className = "warning-hidden";
+        //warning.innerHTML = "!";
 
         control.appendChild(box);
         control.appendChild(range);
+        control.appendChild(warning);
         control.valueChangedListeners = [];
         control.inputs = [box, range];
+        control.warning = warning;
 
-        if(control.dataset.min !== undefined){
-        	box.min = control.dataset.min;
-        	range.min = control.dataset.min;
+        if(control.dataset.min === undefined){
+        	control.dataset.min = "0";
         }
-        if(control.dataset.max !== undefined){
-        	box.max = control.dataset.max;
-        	range.max = control.dataset.max;
+        if(control.dataset.max === undefined){
+        	control.dataset.max = "100";
         }
+        box.min = control.dataset.min;
+    	range.min = control.dataset.min;
+    	box.max = control.dataset.max;
+    	range.max = control.dataset.max;
 
         var onComponentValueChanged = (function(c){
         	return function(){
@@ -315,6 +322,19 @@ function initRangeControls(){
         	this.value = value;
         	for(var key = 0; key < this.inputs.length; key++){
         		this.inputs[key].value = value;
+        	}
+        	this.validate();
+        };
+
+        control.validate = function(){
+        	var val = parseInt(this.value),
+        	    min = parseInt(this.dataset.min),
+        	    max = parseInt(this.dataset.max);
+        	if(val > max || val < min) {
+        		this.warning.className = "warning";
+        	}
+        	else {
+        		this.warning.className = "warning-hidden";
         	}
         };
 
