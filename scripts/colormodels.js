@@ -309,6 +309,15 @@ function initRangeControls(){
 
         var onComponentValueChanged = (function(c){
         	return function(){
+        		var newValue = parseInt(this.value);
+        		var val = parseInt(this.value),
+        	        min = parseInt(c.dataset.min),
+        	        max = parseInt(c.dataset.max);
+        		if(isNaN(newValue) || newValue < min || newValue > max) {
+        			this.value = c.value;
+        			alert("Ты чё творишь??");
+        			return;
+        		}
         		c.setValue(this.value);
         		c.valueChangedEvent();
         	}
