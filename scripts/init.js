@@ -1,4 +1,4 @@
-function init(){
+(function init(){
 	initRangeControls();
 	initColorPicker();
 	initColorPickerModal();
@@ -14,6 +14,4 @@ function init(){
 	currentColor.addColorChangedListener({onColorChanged: resultColorBoxCallback});
 	initColorModels();
 	currentColor.setColor(0.4,0.3,0.7);
-}
-
-init();
+})();

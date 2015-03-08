@@ -1,3 +1,5 @@
+ var Xr =  0.95047, Yr = 1, Zr = 1.08883, eps = 0.008856, k = 903.3;
+
 var currentColor = {
 	setColor: function(r, g, b, caller){
 		_r = r;
@@ -220,10 +222,59 @@ var XYZ = {
 	}
 };
 
+var LAB = {
+	_l: 0,
+	_a: 0,
+	_b: 0,
+
+	setL: function(l){
+		this._l = l;
+		this.updateColor();
+	},
+	setA: function(a){
+		this._a = a;
+		this.updateColor();
+	},
+	setB: function(b){
+		this._b = b;
+		this.updateColor();
+	},
+	onColorChanged: function(r, g, b){
+		var lab = rgbToLab(r,g,b);
+		this._l = lab[0];
+		this._a = lab[1];
+		this._b = lab[2];
+		this.updateComponents();
+	},
+	updateColor: function(){
+		var rgb = labToRgb(this._l, this._a, this._b);
+		currentColor.setColor(rgb[0], rgb[1], rgb[2], this);
+	},
+	updateComponents: function(){
+		document.getElementById('l-control').setValue(Math.floor(this._l));
+		document.getElementById('a-control').setValue(Math.floor(this._a));
+		document.getElementById('b-control').setValue(Math.floor(this._b));
+	},
+	init: function(){
+		currentColor.addColorChangedListener(this);
+		var that = this;
+		document.getElementById('l-control').addValueChangedListener(function(value){
+			that.setL(value);
+		});
+		document.getElementById('a-control').addValueChangedListener(function(value){
+			that.setA(value);
+		});
+		document.getElementById('b-control').addValueChangedListener(function(value){
+			that.setB(value);
+		});
+	}
+};
+
 function initColorModels(){
 	HSV.init();
 	CMYK.init();
 	XYZ.init();
+	LAB.init();
 }
 
 function initRangeControls(){
@@ -293,6 +344,39 @@ function xyzToRgb() {
 		 [-0.9693, 1.8760, 0.0416], 
 		 [0.0557, -0.2040, 1.0573]],
 		 arguments);
+};
+
+function labToRgb(){
+	var xyz = labToXyz.apply(this, arguments);
+	return xyzToRgb.apply(this, xyz);
+}
+
+function rgbToLab(){
+	var xyz = rgbToXyz.apply(this, arguments);
+	return xyzToLab.apply(this, xyz);
+}
+
+function labToXyz(l, a, b) {
+	var fy = (l+16)/116,
+	    fz = fy - b/200,
+	    fx = a/500 + fy,
+	    fxpow3 = fx*fx*fx,
+	    xr = fxpow3 > eps ? fxpow3 : (116*fx - 16)/k,
+	    yr = l > k*eps ? Math.pow((l+16)/116, 3) : l/k,
+	    fzpow3 = fz*fz*fz,
+	    zr = fzpow3 > eps ? fzpow3 : (116*fz-16)/k;
+	return [xr*Xr, yr*Yr, zr*Zr];
+};
+
+function xyzToLab(x, y, z) {
+	var xr = x/Xr, yr = y/Yr, zr = z/Zr,
+	    magic = function(a) {
+	    	return a > eps ? Math.pow(a, 1/3) : (k*a + 16)/116;
+	    },
+	    fx = magic(xr),
+	    fy = magic(yr),
+	    fz = magic(zr);
+	return [116*fy - 16, 500*(fx-fy), 200*(fy-fz)];
 };
 
 function matrixByVector(m, v) {
