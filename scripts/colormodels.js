@@ -288,7 +288,6 @@ function initRangeControls(){
         box.type = 'number';
         range.type = 'range';
         warning.className = "warning-hidden";
-        //warning.innerHTML = "!";
 
         control.appendChild(box);
         control.appendChild(range);
