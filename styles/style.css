@@ -66,6 +66,10 @@
 	width: 950px;
 }
 
+.short input[type="range"]{
+	width: 100px;
+}
+
 .color-scheme input[type="number"]{
 	width: 40px;
 	margin-left: 10px;
