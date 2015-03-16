@@ -61,15 +61,15 @@ function colorModel(a, b, c, fromRgbConverter, toRgbConverter) {
 	this.updateControl = function(name, value){
 		var control = this.controls[name],
 		    min = parseInt(control.dataset.min),
-		    max = parseInt(control.dataset.max), minComps, maxComps;
-		minComps = this.components.slice();
-		maxComps = this.components.slice();
-		minComps[this.componentIndexes[name]] = min;
-		maxComps[this.componentIndexes[name]] = max;
-		var rgbMin = toRgbConverter.apply(this, minComps);
-		var rgbMax = toRgbConverter.apply(this, maxComps);
+		    max = parseInt(control.dataset.max), 
+		    rgbs = [];
+		for(var i = 0; i < 4; i++){
+			var comps = this.components.slice();
+			comps[this.componentIndexes[name]] = (max*i + (4 - i)*min)/4;
+			rgbs.push(toRgbConverter.apply(this, comps));
+		}
 		control.setValue(Math.floor(value));
-		control.setGradient(rgbMin, rgbMax);
+		control.setGradient(rgbs);
 	},
 	this.updateControls = function(){
 		for(var key in this.componentIndexes){
@@ -168,9 +168,13 @@ function initRangeControls(){
         box.addEventListener('change', onComponentValueChanged);
         range.addEventListener('input', onComponentValueChanged);
 
-        control.setGradient = function(rgbFrom, rgbTo){
+        control.setGradient = function(rgbsArray){
         	var range = this.inputs[1];
-        	var gradient = "linear-gradient(to right, " + rgbToCss(rgbFrom) + "," + rgbToCss(rgbTo) + ")";
+        	var rgbs = [];
+        	for(var i = 0; i < rgbsArray.length; i++){
+        		rgbs.push(rgbToCss(rgbsArray[i]));
+        	}
+        	var gradient = "linear-gradient(to right, " + rgbs.join() + ")";
         	range.style.background = gradient;
         }
 
