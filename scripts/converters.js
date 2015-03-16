@@ -3,7 +3,7 @@ function rgbToCmyk(r, g, b){
 		m = 1 - g, 
 		y = 1 - b,
 		k = Math.min(c, m, y);
-    return {c:c*100, m:m*100, y:y*100};
+    return {c:c*100, m:m*100, y:y*100, k:k*100};
 }
 
 function cmykToRgb(c, m, y){

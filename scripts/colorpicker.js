@@ -1,5 +1,6 @@
 function initColorPicker(){
 	var canvas = document.getElementById('color-picker'),
+        smallAim = document.getElementById('small-aim');
         ctx = canvas.getContext('2d'),
         image = new Image();
 
@@ -25,6 +26,23 @@ function initColorPicker(){
         var pixel = imageData.data;
 
         currentColor.setColor(pixel[0]/255, pixel[1]/255, pixel[2]/255);
+    }, false);
+
+    canvas.addEventListener('mouseover', function(event){
+        var coords = getRelativeCoords(event), 
+            x = coords.x, 
+            y = coords.y,
+            radius = canvas.width / 2,
+            dx = radius - x,
+            dy = radius - y,
+            distance = Math.sqrt(dx*dx + dy*dy);
+
+        if(distance >= radius){
+            return;
+        }
+
+        smallAim.style.top = y;
+        smallAim.style.left = x;
     }, false);
 };
 

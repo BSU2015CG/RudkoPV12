@@ -59,6 +59,10 @@ function colorModel(a, b, c, fromRgbConverter, toRgbConverter) {
 		return this.components[index];
 	}
 	this.updateControl = function(name, value){
+		if(this.controls[name].setValue === undefined) {
+			this.controls[name].value = Math.round(value);
+			return;
+		}
 		var control = this.controls[name],
 		    min = parseInt(control.dataset.min),
 		    max = parseInt(control.dataset.max), 
@@ -68,7 +72,7 @@ function colorModel(a, b, c, fromRgbConverter, toRgbConverter) {
 			comps[this.componentIndexes[name]] = (max*i + (4 - i)*min)/4;
 			rgbs.push(toRgbConverter.apply(this, comps));
 		}
-		control.setValue(Math.floor(value));
+		control.setValue(Math.round(value));
 		control.setGradient(rgbs);
 	},
 	this.updateControls = function(){
@@ -110,6 +114,9 @@ function initLab(){
 function initCmyk(){
 	var cmyk = new colorModel('c', 'm', 'y', rgbToCmyk, cmykToRgb);
 	currentColor.addColorChangedListener(cmyk);
+	var kControl = document.getElementById('k-control');
+	cmyk.controls['k'] = kControl;
+	cmyk.componentIndexes['k'] = 3;
 }
 
 function initColorModels(){

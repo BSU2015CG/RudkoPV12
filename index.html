@@ -15,6 +15,8 @@
            <button id="color-picker-button">Show Palette</button>
            <div id="color-picker-wrap" data-hidden="true">
                <canvas id="color-picker" width="267" height="267"></canvas>
+               <div id="small-aim" class="aim" data-hidden="true"></div>
+               <div id="large-aim" class="aim" data-hidden="true"></div>
            </div>
 
            <div class="color-schemes-wrap">
@@ -23,12 +25,6 @@
                    <div id = "h-control" data-max="359" class="range-control">H</div>
                    <div id = "s-control" class="range-control">S</div>
                    <div id = "v-control" class="range-control">V</div>
-               </div>
-
-               <div class="color-scheme" id="cmy-scheme">
-                   <div id = "c-control" class="range-control">C</div>
-                   <div id = "m-control" class="range-control">M</div>
-                   <div id = "y-control" class="range-control">Y</div>
                </div>
 
                <div class="color-scheme">
@@ -41,6 +37,13 @@
                    <div id = "x-control" class="range-control">X</div>
                    <div id = "ciey-control" class="range-control">Y</div>
                    <div id = "z-control" data-max="108" class="range-control">Z</div>
+               </div>
+
+               <div class="color-scheme" id="cmy-scheme">
+                   <div id = "c-control" class="range-control">C</div>
+                   <div id = "m-control" class="range-control">M</div>
+                   <div id = "y-control" class="range-control">Y</div>
+                   <div id="k-div">K<input id = "k-control" type="number"/></div>
                </div>
                
             </div>
