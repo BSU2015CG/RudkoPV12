@@ -42,6 +42,7 @@ function colorModel(a, b, c, fromRgbConverter, toRgbConverter) {
 			return function(value){
 				that.setComponent(name, value);
 			    that.updateColor();
+			    that.updateControls();
 			}
 		})(this, componentName));
 	}
@@ -57,15 +58,37 @@ function colorModel(a, b, c, fromRgbConverter, toRgbConverter) {
 		var index = this.componentIndexes[componentName];
 		return this.components[index];
 	}
+	this.updateControl = function(name, value){
+		var control = this.controls[name],
+		    min = parseInt(control.dataset.min),
+		    max = parseInt(control.dataset.max), minComps, maxComps;
+		minComps = this.components.slice();
+		maxComps = this.components.slice();
+		minComps[this.componentIndexes[name]] = min;
+		maxComps[this.componentIndexes[name]] = max;
+		var rgbMin = toRgbConverter.apply(this, minComps);
+		var rgbMax = toRgbConverter.apply(this, maxComps);
+		control.setValue(Math.floor(value));
+		control.setGradient(rgbMin, rgbMax);
+	},
+	this.updateControls = function(){
+		for(var key in this.componentIndexes){
+			if(this.componentIndexes.hasOwnProperty(key)){
+				var index = this.componentIndexes[key];
+				var value = this.components[index];
+				this.updateControl(key, value);
+			}
+		}
+	},
 	this.onColorChanged = function(r, g, b){
 		var newComponents = fromRgbConverter(r, g, b);
 		for(var key in newComponents){
 			if(newComponents.hasOwnProperty(key)){
 				var value = newComponents[key];
 				this.setComponent(key, value);
-				this.controls[key].setValue(Math.floor(value));
 			}
 		}
+		this.updateControls();
 	}
 }
 
@@ -147,7 +170,8 @@ function initRangeControls(){
 
         control.setGradient = function(rgbFrom, rgbTo){
         	var range = this.inputs[1];
-        	range.style.background = "linear-gradient(to right, " + rgbToCss(rgbFrom) + "," + rgbToCss(rgbTo) + ")";
+        	var gradient = "linear-gradient(to right, " + rgbToCss(rgbFrom) + "," + rgbToCss(rgbTo) + ")";
+        	range.style.background = gradient;
         }
 
         control.setValue = function(value){
@@ -183,6 +207,18 @@ function initRangeControls(){
 };
 
 function rgbToCss(rgb){
-	return "rgb(" + rgb.join() + ")";
+	var rgbArray = [];
+	rgbArray[0] = Math.round(rgb.r*255);
+	rgbArray[1] = Math.round(rgb.g*255);
+	rgbArray[2] = Math.round(rgb.b*255);
+	for(var i = 0; i < 3; i++){
+		if(rgbArray[i] < 0){
+			rgbArray[i] = 0;
+		}
+		if(rgbArray[i] > 255){
+			rgbArray[i] = 255;
+		}
+	}
+	return "rgb(" + rgbArray.join() + ")";
 }
 
