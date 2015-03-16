@@ -1,2 +1,1 @@
-# Fancy Colors
-Web-site for choosing colors with different schemes.
+В первой лабораторной, чтобы попробовать colorpicker перейдите на http://fancycolors.github.io
