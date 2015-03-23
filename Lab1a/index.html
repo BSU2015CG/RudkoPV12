@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<title>Picture Scanner</title>
+    	<meta charset="utf-8">
+    	<link rel="stylesheet" href="styles/style.css"/>
+    	<link rel="stylesheet" href="styles/components.css"/>
+    </head>
+    <body>
+        
+        <div class="wrap">
+
+        	<div class="image-wrap">
+	            <div class="canvas-wrap">
+	                <canvas id="picture-canvas"></canvas>
+	            </div>
+	            <input type="file" id="load-image-button"/>
+    	        <button id="upload-button">Upload</button>
+    	        <button id="download-button" data-hidden="true">Download</button>
+	        </div>
+      
+            <div class="panel">
+	    		<div>
+		    		<canvas id = "r-histogram" class="histogram"></canvas>
+		            <canvas id = "g-histogram" class="histogram"></canvas>
+		            <canvas id = "b-histogram" class="histogram"></canvas>
+		            <canvas id = "t-histogram" class="histogram"></canvas>
+		    	</div>
+
+		    	<div>
+		    		R: <input id="r-avg" type="number" readonly />
+		    		G: <input id="g-avg" type="number" readonly/>
+		    		B: <input id="b-avg" type="number" readonly/>
+		    		<div>A: <input id="t-avg" type="number" readonly/></div>
+		    	</div>
+
+		    	<div>
+		    		<div id="brightness-control" class="range-control" data-min="-100" data-max="100"></div>
+		    		<div id="contrast-control" class="range-control" data-min="-100" data-max="100"></div>
+		    	</div>
+    	    </div>
+
+       </div>
+    	
+    	<script src="scripts/components.js"></script>
+    	<script src="scripts/image.js"></script>
+    	<script src="scripts/init.js"></script>
+    </body>
+</html>

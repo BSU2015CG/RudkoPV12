@@ -1,0 +1,64 @@
+body {
+	font-family: 'Helvetica';
+	width: 100%;
+}
+
+#picture-canvas, .image-wrap, .canvas-wrap {
+	margin: auto;
+}
+
+#load-image-button {
+	display: none;
+}
+
+button[data-hidden="true"] {
+	display: none;
+}
+
+.wrap {
+	text-align: center;
+	margin: auto;
+}
+
+.canvas-wrap {
+	width: 640px;
+	height: 516px;
+	margin-bottom: 10px;
+	overflow: auto;
+}
+
+#picture-canvas {
+	display: block;
+}
+
+.image-wrap {
+	margin-top: 50px;
+	width: 700px;
+	height: 556px;
+	margin-right: 20px;
+}
+
+.panel, .image-wrap {
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+	background: white;
+	padding: 15px;
+	padding-top: 40px;
+	border: 1px solid gray;
+	box-shadow: 0 0 10px gray;
+	border-radius: 5px;
+}
+
+.panel {
+	width: 300px;
+	margin-right: 50px;
+	margin-top: 50px;
+}
+
+.histogram {
+	width: 255px;
+	height: 100px;
+	border-left: 1px solid black;
+	border-bottom: 1px solid black;
+}
